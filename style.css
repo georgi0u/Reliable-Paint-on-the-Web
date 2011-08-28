@@ -51,7 +51,9 @@ a {
 strong {
     font-weight:bold;
 }
-
+input,textarea {
+    outline:none;
+}
 
 /* Site Style */
 
@@ -62,6 +64,7 @@ html {
 body {
     color:#000;
     height:100%;
+    background:url('./graphics/noise.png') repeat;
 
 }
 
@@ -83,10 +86,9 @@ p {
 }
 
 div#mainWrapper {
-    width:1000px;
+    width:960px;;
     margin:auto;
     padding:0px 20px 20px 20px;
-    background-color:#fff;
 }
 
 header#contactHeader {
@@ -99,11 +101,12 @@ header#contactHeader {
     -webkit-box-shadow: 0 0 10px #aaa;
     box-shadow: 0 0 10px #aaa;
     background:#fff;
-    width:100%;
+    min-width:100%;
+    z-index:2;
 }
 
 div#contactHeaderContentsWrapper {
-    width:1000px;
+    width:960px;;
     margin:auto;
 }
 
@@ -133,7 +136,7 @@ header#contactHeader span {
 
 header#logoHeader {
     position:relative;
-    width:1000px;
+    width:960px;;
     margin:auto;
 }
 
@@ -152,11 +155,29 @@ section.mainSection {
 section.mainSection > h1,
 nav > h1,
 footer h1 {
+    text-shadow:0 1px 1px #012624;
     font-size:50px;
     line-height:60px;
     margin-bottom:50px;
     padding-left:30px;
     padding-right:30px;
+}
+
+section#gallery div#imageWrapper {
+    position:relative;
+    width:800px;
+    margin:auto;
+    background-color:#aaa;
+}
+
+section#gallery aside {
+    position:absolute;
+    bottom:0;
+    padding:25px;
+}
+
+section#gallery aside > * {
+    color:#fff !important;
 }
 
 section#gallery img.galleryImage {
@@ -229,16 +250,17 @@ section #coreValues{
 
 section#coreValues ul {
     font-size:25px;
-    moz-box-shadow: 0 0 10px #aaa;
-    webkit-box-shadow: 0 0 10px #aaa;
-    box-shadow: 0 0 10px #aaa;
     overflow:auto;
     padding:30px;
+    -moz-box-shadow: 0 0 10px #aaa;
+    -webkit-box-shadow: 0 0 10px #aaa;
+    box-shadow: 0 0 10px #aaa;
+    background:#fff;
 }
 
 section#coreValues li {
     float:left;
-    width:31%;  
+    width:31%;
 }
 
 section#coreValues li:nth-child(2) {
@@ -246,12 +268,13 @@ section#coreValues li:nth-child(2) {
     padding-right:3%;
 }
 
-
 section#aboutUs {
+    background:#fff;
+    clear:both;
     padding-top:30px;
     padding-bottom:20px;
-    moz-box-shadow: 0 0 10px #aaa;
-    webkit-box-shadow: 0 0 10px #aaa;
+    -moz-box-shadow: 0 0 10px #aaa;
+    -webkit-box-shadow: 0 0 10px #aaa;
     box-shadow: 0 0 10px #aaa;
 }
 
@@ -267,53 +290,111 @@ section#aboutUs p.indent {
 }
 
 footer {
-    height:100%;
-    width:100%;
+    min-height:100%;
+    min-width:100%;
     background-color:#04756f;
-    border-top:2px #07c2b8 solid;
-    z-index:3;
+    border-top:2px #059992 solid;
     position:relative;
-}
-
-footer h1 {
-    border-bottom:3px #fff solid;
-    color:#fff !important;
+    margin-bottom:-120px;
+    z-index:3;
 }
 
 section#contactUs {
-    width:1000px;
+    width:960px;
     margin:auto;
-    padding:50px 0 30px;    
+    padding:50px 0 30px;
 }
 
-section#contactUs form, section#contactUs h2 {
-    margin-left:30px;
-    width:500px;
-    display:block;
+section#contactUs h1 {
+    background:url('./graphics/footer_border.png') repeat-x;
+    background-position:left bottom;
+    padding-bottom:5px;
+    color:#fff !important;
+}
+
+section#contactUs address {
+    margin:0 30px 50px 30px;
     color:#fff;
+    line-height:24px;
+    font-size:24px;
+}
+
+section#contactUs address span {
+    font-size:16px;
+    margin-right:10px;
+    display:inline-block;
+    text-align:center;
+}
+
+section#contactUs li {
+    margin-bottom:30px;
+}
+
+section#contactUs form {
+    margin-left:30px;
+    margin-right:30px;
 }
 
 section#contactUs form > .takesInput {
     display:block;
     padding:10px;
-    border:0;
     border-radius:5px;
-    margin-top:5px;
-    width:400px;
-}
-
-section#contactUs form > * {
-    display:block;
-    padding:10px;
+    margin-top:10px;
     border:0;
-    border-radius:5px;
-    margin-top:5px;
     width:400px;
+    font-family:tahoma; 
 }
 
 section#contactUs textarea {
-    display:block;
-    height:400px;
+    min-height:200px;
+    width:880px !important;
+}
+
+section#contactUs input.submit {
+    border-radius:5px;
+    padding:10px;
+    border:0;
+    background:#fff;
+    margin-top:10px;
+    margin-left:0;
+}
+
+section#contactUs input.submit:hover {
+    cursor:pointer;
+}
+
+div#copyrightWrapper,
+div#copyrightPush {
+    height:120px;
+}
+
+div#copyrightWrapper {
+    position:relative;
+    width:960px;
+    margin:auto;
+    z-index:4;
+    font-family:tahoma, arial, sans-serif;
+    color:#012624;
+}
+
+address#contactInfo  {
+    text-align:center;
+    padding-bottom:20px;
+}
+
+address#contactInfo span {
+    text-align:center;
+    display:inline-block;
+    font-size:30px;
+}
+
+aside#copyright {
+    padding-top:25px;
+    margin:0 auto 0 auto;
+    line-height:12pt;
+    font-size:8pt;
+    text-align:center;
+    background:url('./graphics/footer_border.png') repeat-x top left;
 }
 
 .clear {
