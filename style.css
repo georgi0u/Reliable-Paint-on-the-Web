@@ -64,8 +64,8 @@ html {
 body {
     color:#000;
     height:100%;
-    background:url('./graphics/noise.png') repeat;
-
+/*    background-color:#FFDBB0;*/
+    background:url("./graphics/egg_shell.png");
 }
 
 h1, h2, h3, h4, h5 {
@@ -112,9 +112,18 @@ div#contactHeaderContentsWrapper {
 
 header#contactHeader > 
 div#contactHeaderContentsWrapper h1 {
-    color:#d10000;
-    font-weight:bold;
-    display:inline-block;
+    
+}
+
+header#contactHeader > 
+div#contactHeaderContentsWrapper h2,
+header#contactHeader > 
+div#contactHeaderContentsWrapper h1{
+    color:#d10000 !important;
+    font-weight:bold !important;
+    display:inline-block !important;
+    margin-left:30px !important;
+    font-size:14px !important;
 }
 
 header#contactHeader >
@@ -154,7 +163,7 @@ section.mainSection {
 section.mainSection > h1,
 nav > h1,
 footer h1 {
-    text-shadow:0 1px 1px #2c1127;
+/*    text-shadow:0 1px 1px #2c1127;*/
     font-size:50px;
     line-height:60px;
     margin-bottom:50px;
@@ -181,9 +190,9 @@ section#gallery aside > * {
 
 section#gallery img.galleryImage {
     border:5px #fff solid;
-    -moz-box-shadow: 0 0 10px #aaa;
-    -webkit-box-shadow: 0 0 10px #aaa;
-    box-shadow: 0 0 10px #aaa;
+   -moz-box-shadow: 0 0 10px #aaa;
+   -webkit-box-shadow: 0 0 10px #aaa;
+   box-shadow: 0 0 10px #aaa;
     width:800px;
     margin:auto;
     display:block;
@@ -251,9 +260,9 @@ section#coreValues ul {
     font-size:25px;
     overflow:auto;
     padding:30px;
-    -moz-box-shadow: 0 0 10px #aaa;
-    -webkit-box-shadow: 0 0 10px #aaa;
-    box-shadow: 0 0 10px #aaa;
+   -moz-box-shadow: 0 0 10px #aaa;
+   -webkit-box-shadow: 0 0 10px #aaa;
+   box-shadow: 0 0 10px #aaa;
     background:#fff;
 }
 
@@ -272,9 +281,9 @@ section#aboutUs {
     clear:both;
     padding-top:30px;
     padding-bottom:20px;
-    -moz-box-shadow: 0 0 10px #aaa;
-    -webkit-box-shadow: 0 0 10px #aaa;
-    box-shadow: 0 0 10px #aaa;
+   -moz-box-shadow: 0 0 10px #aaa;
+   -webkit-box-shadow: 0 0 10px #aaa;
+   box-shadow: 0 0 10px #aaa;
 }
 
 section#aboutUs p {
