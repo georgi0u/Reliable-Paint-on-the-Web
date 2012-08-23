@@ -68,18 +68,22 @@ body {
     background:url("./graphics/egg_shell.png");
 }
 
-h1, h2, h3, h4, h5 {
+div#mainWrapper h1, 
+div#mainWrapper h2, 
+div#mainWrapper h3, 
+div#mainWrapper h4, 
+div#mainWrapper h5 {
     color:#d10000;
     font-family:Times New Roman;
 }
 
-h2 {
+div#mainWrapper h2 {
     font-size:20px;
     color:#D90000;
     margin-bottom:10px;
 }
 
-p {
+div#mainWrapper p {
     font-family:tahoma, arial, san-serif;
     font-size:15px;
     line-height:22px;
@@ -111,19 +115,25 @@ div#contactHeaderContentsWrapper {
 }
 
 header#contactHeader > 
-div#contactHeaderContentsWrapper h1 {
-    
-}
-
-header#contactHeader > 
 div#contactHeaderContentsWrapper h2,
 header#contactHeader > 
 div#contactHeaderContentsWrapper h1{
-    color:#d10000 !important;
-    font-weight:bold !important;
-    display:inline-block !important;
-    margin-left:30px !important;
-    font-size:14px !important;
+    color:#d10000;
+    font-weight:bold;
+    display:inline-block;
+    margin-left:30px;
+    font-size:14px;
+}
+
+header#contactHeader > 
+div#contactHeaderContentsWrapper h1 {
+    border-bottom:1px red dotted;
+    display:none;
+}
+
+header#contactHeader:hover > 
+div#contactHeaderContentsWrapper h1 {
+    display:inline-block;
 }
 
 header#contactHeader >
@@ -132,8 +142,9 @@ div#contactHeaderContentsWrapper > * {
     color:#666;
     letter-spacing:1px;
     font-size:14px;
-    padding-top:15px;
-    padding-bottom:15px;        
+    margin-top:15px;
+    margin-bottom:12px;
+    padding-bottom:3px;
 }
 
 header#contactHeader span {
