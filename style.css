@@ -56,7 +56,6 @@ input,textarea {
 }
 
 /* Site Style */
-
 html {
     height:100%;
 }
@@ -64,15 +63,11 @@ html {
 body {
     color:#000;
     height:100%;
-/*    background-color:#FFDBB0;*/
     background:url("./graphics/egg_shell.png");
+    font-family:tahoma,sans-serif;
 }
 
-div#mainWrapper h1, 
-div#mainWrapper h2, 
-div#mainWrapper h3, 
-div#mainWrapper h4, 
-div#mainWrapper h5 {
+h1, h2, h3, h4, h5 {
     color:#d10000;
     font-family:Times New Roman;
 }
@@ -84,8 +79,7 @@ div#mainWrapper h2 {
 }
 
 div#mainWrapper p {
-    font-family:tahoma, arial, san-serif;
-    font-size:15px;
+font
     line-height:22px;
 }
 
@@ -98,7 +92,6 @@ div#mainWrapper {
 header#contactHeader {
     position:fixed;
     z-index:2;
-    text-align:right;
     padding-left:10px;
     padding-right:10px;
     -moz-box-shadow: 0 0 10px #aaa;
@@ -109,42 +102,36 @@ header#contactHeader {
     z-index:2;
 }
 
-div#contactHeaderContentsWrapper {
+header#contactHeader address {
     width:960px;;
     margin:auto;
-}
-
-header#contactHeader > 
-div#contactHeaderContentsWrapper h2,
-header#contactHeader > 
-div#contactHeaderContentsWrapper h1{
-    color:#d10000;
-    font-weight:bold;
-    display:inline-block;
-    margin-left:30px;
-    font-size:14px;
-}
-
-header#contactHeader > 
-div#contactHeaderContentsWrapper h1 {
-    border-bottom:1px red dotted;
-    display:none;
-}
-
-header#contactHeader:hover > 
-div#contactHeaderContentsWrapper h1 {
-    display:inline-block;
-}
-
-header#contactHeader >
-div#contactHeaderContentsWrapper > * {
-    display:inline-block;
+    text-align:right;        
     color:#666;
-    letter-spacing:1px;
+/*    letter-spacing:1px;*/
     font-size:14px;
     margin-top:15px;
     margin-bottom:12px;
     padding-bottom:3px;
+}
+
+header#contactHeader h2{
+    font-family:tahoma,sans-serif;
+    color:#d10000;
+    font-weight:bold;
+    display:inline-block;
+    font-size:14px;
+    margin-right:10px;
+    margin-left:30px;
+}
+
+header#contactHeader h1 {
+    visibility:hidden;
+    color:#ccc;
+    font-weight:normal;
+
+}
+header#contactHeader:hover h1 {
+    visibility:visible;
 }
 
 header#contactHeader span {
@@ -422,5 +409,5 @@ aside#copyright {
 
 .clear {
     clear:both;
-    display:block;
+    display:none;
 }
