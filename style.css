@@ -64,6 +64,7 @@ body {
     color:#000;
     height:100%;
     background:url("./graphics/egg_shell.png");
+/*    font-family:Times New Roman;    */
     font-family:tahoma,sans-serif;
 }
 
@@ -79,7 +80,7 @@ div#mainWrapper h2 {
 }
 
 div#mainWrapper p {
-font
+    font-size:15px;
     line-height:22px;
 }
 
@@ -89,11 +90,9 @@ div#mainWrapper {
     padding:0px 20px 20px 20px;
 }
 
-header#contactHeader {
+div#topBarWrapper {
     position:fixed;
     z-index:2;
-    padding-left:10px;
-    padding-right:10px;
     -moz-box-shadow: 0 0 10px #aaa;
     -webkit-box-shadow: 0 0 10px #aaa;
     box-shadow: 0 0 10px #aaa;
@@ -102,39 +101,45 @@ header#contactHeader {
     z-index:2;
 }
 
-header#contactHeader address {
-    width:960px;;
-    margin:auto;
-    text-align:right;        
-    color:#666;
-/*    letter-spacing:1px;*/
-    font-size:14px;
-    margin-top:15px;
-    margin-bottom:12px;
-    padding-bottom:3px;
+ul#navLinks {
+    display:block;
+    height:100%;
 }
 
-header#contactHeader h2{
-    font-family:tahoma,sans-serif;
-    color:#d10000;
-    font-weight:bold;
+li.navLink {
     display:inline-block;
+    height:100%;
+    margin-right:20px;
+    text-align:middle;
+}
+
+li.navLink > a {
+    display:inline-block;
+    padding:13px 0 13px 0;
+    font-weight:bold;
+    height:inherit;
+}
+
+li.navLink a:hover {
+    color:#aaa;
+}
+
+
+header#topBar {    
+    min-width:800px;
+    max-width:960px;;
+    margin:auto;
+    color:#666;
     font-size:14px;
-    margin-right:10px;
-    margin-left:30px;
+    letter-spacing:1px;
+    height:40px;
 }
 
-header#contactHeader h1 {
-    visibility:hidden;
-    color:#ccc;
-    font-weight:normal;
-
-}
-header#contactHeader:hover h1 {
-    visibility:visible;
+header#topBar address{
+    color:#d10000;  
 }
 
-header#contactHeader span {
+header#topBar span {
     color:#d10000;
     padding-left:5px;
     padding-right:5px;
@@ -149,13 +154,16 @@ header#logoHeader {
 header#logoHeader > img#logo {
     width:200px;    
     padding-top:80px;
-    padding-bottom:50px;
 }
 
 section.mainSection {
     line-height:30px;
-    margin-bottom:100px;
+    padding-top:60px;
     position:relative;
+}
+
+section.mainSection:first-child {
+    padding-top:50px;
 }
 
 section.mainSection > h1,
@@ -303,6 +311,7 @@ footer {
     position:relative;
     margin-bottom:-120px;
     z-index:3;
+    margin-top:100px;
 }
 
 section#contactUs {

@@ -13,11 +13,18 @@
 
   <body>
 
-    <header id = "contactHeader">
-      <address>
-        <h2>Phone:</h2>516.313.6414<h2>Email:</h2><script>document.write(email());</script>
-      </address>
-    </header>    
+    <div id = "topBarWrapper">
+      <header id = "topBar">
+        <nav>
+          <ul id = "navLinks">
+            <li class = "navLink"><a href = "#coreValuesAndAboutUs">About Us</a>
+            <li class = "navLink"><a href = "#contactUs">Contact Us</a>
+            <li class = "navLink"><address><script>document.write(email());</script></address>
+            <li class = "navLink"><address>516.313.6414</address>
+          </ul>
+        </nav>
+      </header>    
+    </div>
 
     <header id = "logoHeader">
       <img id = "logo" src = "./graphics/1.png"/>

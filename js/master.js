@@ -32,22 +32,20 @@ function clearForm(event) {
 // Random encryption key feature by Andrew Moulden, Site Engineering Ltd
 // This code is freeware provided these four comment lines remain intact
 // A wizard to generate this code is at http://www.jottings.com/obfuscator/
-function email(){                                                                       
-    coded = "EG0w4Ew@jJqc4WqJf4c0w.GjP";
-    key = "ZTGHN8qt6fVgBcCre4zym53hWLInDuF1wKOvPSEojJAlUsp7MYid0kaxXRQ29b";
-    shift=coded.length;
-    link="";
+function email(){
+    coded = "1pJHT1H@NXkvTGkXdTvJH.1py"
+    key = "wxd9QYWuyXnEbVo5T7MAZ1rUI6RjFqgi0StJlGLpDP3CzmeNhs82Ba4KvOcHfk"
+    shift=coded.length
+    link=""
     for (i=0; i<coded.length; i++) {
         if (key.indexOf(coded.charAt(i))==-1) {
-            ltr = coded.charAt(i);
-            link += (ltr);
+            ltr = coded.charAt(i)
+            link += (ltr)
         }
         else {     
-            ltr = (key.indexOf(coded.charAt(i))-shift+key.length) % key.length;
-            link += (key.charAt(ltr));
+            ltr = (key.indexOf(coded.charAt(i))-shift+key.length) % key.length
+            link += (key.charAt(ltr))
         }
     }
-    return "<a href = \"mailto:" + link + "\">" + link + "</a>";
+    return "<a href='mailto:"+link+"'>Contact@ReliablePaint.com</a>";
 }
-
-
