@@ -1,12 +1,16 @@
 $(function(){    
     // Attach an event listener to all input fields to clear the "default" value on click
-    $("input:text, textarea").bind("focus blur",clearForm );
+    $("input:text, textarea").bind("focus blur", clearForm);
 
-    $("section#coreValuesAndAboutUs > h1.nonActive").click(function(event){
-        sections = $(this).siblings("section");        
-
-        sections.eq(".nonActive").removeClass("nonActive");
-
+    $("section#coreValuesAndAboutUs > h1.nonActive").live('click',function(event){
+        to_toggle = $("section#coreValuesAndAboutUs").children();
+        to_toggle.each(function() {
+            var non_active_str = "nonActive"
+            if($(this).attr("class") == non_active_str)
+                $(this).toggleClass();
+            else
+                $(this).toggleClass(non_active_str);
+        });
     });
     
 
@@ -14,7 +18,7 @@ $(function(){
 
 
 
-
+// Clears forms placeholder text
 function clearForm(event) {
     if (event.type == 'focus') {
         if (!$(this).data('placeholder'))

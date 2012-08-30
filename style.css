@@ -136,7 +136,7 @@ header#topBar {
 }
 
 header#topBar address{
-    color:#d10000;  
+
 }
 
 header#topBar span {
@@ -167,12 +167,10 @@ section.mainSection:first-child {
 }
 
 section.mainSection > h1,
-nav > h1,
 footer h1 {
-/*    text-shadow:0 1px 1px #2c1127;*/
     font-size:50px;
-    line-height:60px;
-    margin-bottom:50px;
+    line-height:60px;    
+    margin-bottom:30px;
     padding-left:30px;
     padding-right:30px;
 }
@@ -317,18 +315,19 @@ footer {
 section#contactUs {
     width:960px;
     margin:auto;
-    padding:50px 0 30px;
+    padding-bottom:30px;
 }
 
 section#contactUs h1 {
     background:url('./graphics/footer_border.png') repeat-x;
     background-position:left bottom;
+    padding-top:60px;
     padding-bottom:5px;
     color:#fff !important;
 }
 
 section#contactUs address {
-    margin:0 30px 50px 30px;
+    margin:0 30px 0 30px;
     color:#fff;
     line-height:24px;
     font-size:24px;
@@ -413,7 +412,6 @@ aside#copyright {
     line-height:12pt;
     font-size:8pt;
     text-align:center;
-    background:url('./graphics/footer_border.png') repeat-x top left;
 }
 
 .clear {
