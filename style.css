@@ -64,7 +64,6 @@ body {
     color:#000;
     height:100%;
     background:url("./graphics/egg_shell.png");
-/*    font-family:Times New Roman;    */
     font-family:tahoma,sans-serif;
 }
 
@@ -135,10 +134,6 @@ header#topBar {
     height:40px;
 }
 
-header#topBar address{
-
-}
-
 header#topBar span {
     color:#d10000;
     padding-left:5px;
@@ -194,9 +189,9 @@ section#gallery aside > * {
 
 section#gallery img.galleryImage {
     border:5px #fff solid;
-   -moz-box-shadow: 0 0 10px #aaa;
-   -webkit-box-shadow: 0 0 10px #aaa;
-   box-shadow: 0 0 10px #aaa;
+    -moz-box-shadow: 0 0 10px #aaa;
+    -webkit-box-shadow: 0 0 10px #aaa;
+    box-shadow: 0 0 10px #aaa;
     width:800px;
     margin:auto;
     display:block;
@@ -226,10 +221,6 @@ section#gallery a#goRight {
 section#gallery a#goRight:hover {
     background-image:url("./graphics/right_highlight.png");
     right:0;
-}
-
-section#coreValuesAndAboutUs {
-    position:relative;
 }
 
 section#coreValuesAndAboutUs h1:nth-child(1) { 
@@ -264,9 +255,9 @@ section#coreValues ul {
     font-size:25px;
     overflow:auto;
     padding:30px;
-   -moz-box-shadow: 0 0 10px #aaa;
-   -webkit-box-shadow: 0 0 10px #aaa;
-   box-shadow: 0 0 10px #aaa;
+    -moz-box-shadow: 0 0 10px #aaa;
+    -webkit-box-shadow: 0 0 10px #aaa;
+    box-shadow: 0 0 10px #aaa;
     background:#fff;
 }
 
@@ -300,6 +291,32 @@ section#aboutUs p.indent {
     text-indent:30px;
     display:block;
 }
+
+/***************/
+section#ourServices {}
+
+ul#serviceList {
+    display:table;
+    width:100%;
+}
+
+ul#serviceList > li {
+    display:table-cell;
+    text-align:center;
+    height:10px;    
+}
+
+ul#serviceList > li {
+    color: transparent;
+    font-size:1px;
+}
+
+ul#serviceList > li:nth-child(1) {background-color:red;}
+ul#serviceList > li:nth-child(2) {background-color:orange;}
+ul#serviceList > li:nth-child(3) {background-color:yellow;}
+ul#serviceList > li:nth-child(4) {background-color:green;}
+ul#serviceList > li:nth-child(5) {background-color:blue;}
+ul#serviceList > li:nth-child(6) {background-color:purple;}
 
 footer {
     min-height:100%;
