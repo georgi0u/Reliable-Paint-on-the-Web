@@ -55,42 +55,34 @@ input,textarea {
     outline:none;
 }
 
+/* Site Style */
+
 .shadowed {
     -moz-box-shadow: 0 0 10px #aaa;
     -webkit-box-shadow: 0 0 10px #aaa;
     box-shadow: 0 0 10px #aaa;
 }
 
+.serif {font-family:Times New Roman;}
+.sans {font-family:tahoma,sans-serif;}
+
 @header_red: #d10000;
 @max_width:960px;
 
-/* Site Style */
+// Setup
 html {height:100%;}
 body {
     color:#000;
     height:100%;
     background:url("./graphics/egg_shell.png");
-    font-family:tahoma,sans-serif;
+    .sans;
 }
 h1, h2, h3, h4, h5 {
     color:@header_red;
-    font-family:Times New Roman;
+    .serif;
 }
 
-div#mainWrapper{
-    width:@max_width;
-    margin:auto;
-    padding:0px 20px 20px 20px;
-    h2 {
-        font-size:20px;
-        margin-bottom:10px;
-    }
-    p {
-        font-size:15px;
-        line-height:22px;
-    }
-}
-
+// Top Bar
 div#topBarWrapper {
     position:fixed;
     z-index:2;
@@ -106,28 +98,32 @@ div#topBarWrapper {
         font-size:14px;
         letter-spacing:1px;
         height:40px;
+        li {
+            display:inline-block;
+            height:100%;
+            text-align:middle;
+            a {
+                display:inline-block;
+                padding:13px 0 13px 0;
+                &:hover {color:#aaa;}         
+            }
+        }
         ul#navLinks {
             display:block;
             height:100%;
-            li.navLink {
-                display:inline-block;
-                height:100%;
-                margin-right:20px;
-                text-align:middle;
-                & > a {
-                    display:inline-block;
-                    padding:13px 0 13px 0;
-                    font-weight:bold;
-                    height:inherit;
-                    &:hover {
-                        color:#aaa;
-                    }
-                }
-            }
+            float:left;
+            li {margin-right:20px;}
+            li > a {font-weight:bold;}
+        }
+        ul#contactQuickRef {
+            float:right;
+            h2 {display:inline;margin-right:8px;}
+            li {margin-left:20px;}
         }
     }
 }
 
+// Logo
 header#logoHeader {
     position:relative;
     width:@max_width;
@@ -138,6 +134,22 @@ header#logoHeader {
     }
 }
 
+// Main site Sections Wrapper
+div#mainWrapper{
+    width:@max_width;
+    margin:auto;
+    padding:0px 20px 20px 20px;
+    h2 {
+        font-size:20px;
+        margin-bottom:10px;
+    }
+    p {
+        font-size:15px;
+        line-height:22px;
+    }
+}
+
+// Main Section Class
 section.mainSection {
     &:first-child {padding-top:50px;}
     line-height:30px;
@@ -152,7 +164,7 @@ section.mainSection {
     }
 }
 
-
+// Image Gallert Main Section
 section#gallery {
     div#imageWrapper {
         position:relative;
@@ -185,7 +197,7 @@ section#gallery {
     }   
 }
 
-
+// Core Values/About Us Main Section
 section#coreValuesAndAboutUs{
     h1 {
         &:hover{cursor:pointer;}
@@ -232,6 +244,7 @@ section#coreValuesAndAboutUs{
     }
 }
 
+// Our Services Main Secion
 section#ourServices {
     ul#serviceList {
         display:table;
@@ -252,6 +265,7 @@ section#ourServices {
     }
 }
 
+// Footer 
 footer {
     min-height:100%;
     min-width:100%;
@@ -279,12 +293,6 @@ footer {
             padding-bottom:5px;
             color:#fff;
         }
-        address {
-            margin:0 30px 0 30px;
-            color:#fff;
-            line-height:24px;
-            font-size:24px;     
-        }
         form {
             margin-left:30px;
             margin-right:30px;
@@ -311,10 +319,26 @@ footer {
                 &:hover {cursor:pointer;}
             }
         }
+        section#altContactInfo {
+            margin-top:100px;
+            p {
+                margin:0 30px 0 30px;
+                font-size:32px;
+                line-height:60px;
+                color:#fff;
+                text-align:center;
+                .serif;
+                em {
+                    @color: #012624;
+                    background:url('./graphics/footer_border.png') repeat-x;
+                    background-position:left bottom;
+                }
+            }
+        }
     }
 }
 
-div#copyrightWrapper,
+div#copyrightWrapper, 
 div#copyrightPush {
     height:120px;
 }
@@ -324,7 +348,6 @@ div#copyrightWrapper {
     width:@max_width;
     margin:auto;
     z-index:4;
-    font-family:tahoma, arial, sans-serif;
     color:#012624;
     aside#copyright {
         padding-top:65px;

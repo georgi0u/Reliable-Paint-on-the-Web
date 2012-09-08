@@ -1,7 +1,13 @@
 $(function(){    
+    $('ul#navLinks a').smoothScroll({
+        easing: 'swing',
+        speed: 400
+    });
+
     // Attach an event listener to all input fields to clear the "default" value on click
     $("input:text, textarea").bind("focus blur", clearForm);
 
+    // Flip between core values and about us sections
     $("section#coreValuesAndAboutUs > h1.nonActive").live('click',function(event){
         to_toggle = $("section#coreValuesAndAboutUs").children();
         to_toggle.each(function() {
@@ -11,12 +17,10 @@ $(function(){
             else
                 $(this).toggleClass(non_active_str);
         });
-    });
+    });    
     
 
 });
-
-
 
 // Clears forms placeholder text
 function clearForm(event) {
@@ -30,7 +34,6 @@ function clearForm(event) {
         if ($.trim($(this).val()) == '')
             $(this).val($(this).data('placeholder'));
 }
-
 
 // Email obfuscator script 2.1 by Tim Williams, University of Arizona
 // Random encryption key feature by Andrew Moulden, Site Engineering Ltd
