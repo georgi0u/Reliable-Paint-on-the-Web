@@ -57,30 +57,19 @@ input,textarea {
 
 /* Site Style */
 
+// Setup
+body {background:url("./graphics/egg_shell.png");.sans;}
+h1, h2, h3, h4, h5 {color:@header_red;.serif;}
+
+@header_red: #d10000;
+@max_width:960px;
 .shadowed {
     -moz-box-shadow: 0 0 10px #aaa;
     -webkit-box-shadow: 0 0 10px #aaa;
     box-shadow: 0 0 10px #aaa;
 }
-
 .serif {font-family:Times New Roman;}
 .sans {font-family:tahoma,sans-serif;}
-
-@header_red: #d10000;
-@max_width:960px;
-
-// Setup
-html {height:100%;}
-body {
-    color:#000;
-    height:100%;
-    background:url("./graphics/egg_shell.png");
-    .sans;
-}
-h1, h2, h3, h4, h5 {
-    color:@header_red;
-    .serif;
-}
 
 // Top Bar
 div#topBarWrapper {
@@ -88,7 +77,6 @@ div#topBarWrapper {
     z-index:2;
     background:#fff;
     min-width:100%;
-    z-index:2;
     .shadowed;
     header#topBar {
         min-width:800px;
@@ -273,7 +261,6 @@ footer {
     border-top:2px #059992 solid;
     position:relative;
     margin-bottom:-120px;
-    z-index:3;
     margin-top:100px;
     h1 {
         font-size:50px;
@@ -347,7 +334,6 @@ div#copyrightWrapper {
     position:relative;
     width:@max_width;
     margin:auto;
-    z-index:4;
     color:#012624;
     aside#copyright {
         padding-top:65px;
