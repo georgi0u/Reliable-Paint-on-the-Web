@@ -18,7 +18,6 @@ $(function(){
                 $(this).toggleClass(non_active_str);
         });
     });    
-    
 
 });
 
