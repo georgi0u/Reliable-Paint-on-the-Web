@@ -101,12 +101,13 @@
       <section id = "contactUs">
         <section id = "webForm">
           <h1>Get In Touch</h1>
-          <form>
-            <input class = "takesInput" type = "text" value = "Full Name" border="none"/>
-            <input class = "takesInput" type = "text" value = "Your Email" border="none"/>
-            <input class = "takesInput" type = "text" value = "Your Phone Number" border="none"/>
-            <textarea class = "takesInput" type = "textbox">Your Message</textarea>
-            <input class = "submit" type = "submit" value = "Send Us Your Message" border="none"/>
+          <form action = "cgi-bin/mail.wsgi" method = "post" id = "contactForm">
+            <input class = "takesInput" id = "name_input" name = "name" type = "text" value = "Full Name" border="none"/>
+            <input class = "takesInput" id = "reply_to_input" name = "reply_to" type = "text" value = "Your Email" border="none"/>
+            <input class = "takesInput" id = "phone_number_input" name = "phone_number" type = "text" value = "Your Phone Number" border="none"/>
+            <input class = "takesInput" id = "body_input" name = "body" type = "text" value = "" border = "none"/>
+            <textarea class = "takesInput" id = "message_input" name = "message" type = "textbox">Your Message</textarea>
+            <input class = "submit" type = "submit" value = "Send Us Your Message" border="none">
           </form>        
         </section>
         

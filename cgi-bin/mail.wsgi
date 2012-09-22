@@ -21,7 +21,7 @@ def send_email(config, reply_to_address, message_body):
     subject     = config.get("MAIL_CONFIG", "SUBJECT")
  
     # Format Message
-    email = MIMEText(message_body)
+    email = MIMEText(message_body, 'html')
     email['Subject'] = subject
     email['From'] = username
     email['To'] = to_address
@@ -38,22 +38,59 @@ def send_email(config, reply_to_address, message_body):
 
 
 def format_message(fields):
-    reply_to_address = fields.getvalue("reply_to","")
+    # Email Address
+    reply_to_address = fields.getfirst("reply_to","")
+    
+    # Phone Number
     phone_number = fields.getfirst("phone_number","")
-
-    message_body = "Name: {0} | ".format(fields.getvalue("name"))
-
-    if phone_number:
-        message_body += "Phone number: {0}".format(phone_number)
+    
+    # Note
+    note_html_part = "<div style = 'padding-bottom:20px; font-style:italic;'>{0}</div>"
+    note = "This person didn't leave a{missing}, you need to <strong>{action}</strong>!"
+    if not reply_to_address:
+        reply_to_address = "(No Email Provided)"
+        note_html_part = note_html_part.format(note.format(missing = "n email address",
+                                                           action = "call them"))
+    elif not phone_number:
+        phone_number = "(No Phone Number Provided)"
+        note_html_part = note_html_part.format(note.format(missing = " phone number",
+                                                           action = "email them"))
     else:
-        message_body += "(No Phone Number Provided)"
+        note_html_part = ""
 
+    # Message
+    message_html_part = ""
+    for line in fields.getvalue("message").splitlines():
+        message_html_part += "<p style = 'font-size:12ptmargin:0;padding:0;padding-bottom:5px'>{0}</p>".format(line)
+    
 
-
-    message_body += "\n\n"
-    message_body += fields.getvalue("message")
-
-    return (reply_to_address, message_body)
+    # HTML
+    message_body = """\
+<!doctype html>
+<html>
+  <head><title>Email</title></head>
+  <body>
+    <div style = 'margin:0; padding-top:20px; margin-bottom:20px;'>
+      <ul style = 'list-style:none; margin:0; padding:0;'>
+        <li style = 'display: inline; margin:0; padding:0; padding-right:10px; font-size:12pt;'><h2 style = 'display:inline;'>Name  : </h2><span>{name}</span></li>
+        <li style = 'display: inline; margin:0; padding:0; padding-right:10px; font-size:12pt;'><h2 style = 'display:inline;'>Email : </h2><span>{email}</span></li>
+        <li style = 'display: inline; margin:0; padding:0; padding-right:10px; font-size:12pt;'><h2 style = 'display:inline;'>Phone : </h2><span>{phone_number}</span></li>
+      </ul>
+    </div>
+    {note}
+    <h2 style = 'display:inline-block;font-size:12pt;border-bottom:1px #000 solid;'>Message</h2>
+    <div>
+      {msg_body}
+    </div>
+  </body>
+</html>
+"""
+ 
+    return message_body.format(name=fields.getvalue("name"),
+                               email=reply_to_address,
+                               phone_number=phone_number,
+                               note=note_html_part,
+                               msg_body=message_html_part)
 
 
 def application(environ, start_response):
@@ -73,28 +110,31 @@ def application(environ, start_response):
     # Validate Args
 
     # Anti Spam Measure
-    if "body" in fields.keys():
-        start_response(status, response_headers)        
+    if fields.getfirst("body",""):
+        start_response(status, response_headers)
+        output += "blah"
         return [output]
 
     for arg in ["name", "message"]:
         if arg not in fields.keys():
+            output += "blah"
             start_response(status, response_headers)        
             return [output]
 
     if "reply_to" not in fields.keys() and "phone_number" not in fields.keys():
+        output += "blah"
         start_response(status, response_headers)        
         return [output]        
     
 
     # Format and Send Message
-    reply_to_address, message_body = format_message(fields)
+    message_body = format_message(fields)
 
     config = ConfigParser.RawConfigParser()
     dirname = os.path.dirname(__file__)
     config.read([os.path.join(dirname,'mail.cfg')])
 
-    send_email(config, reply_to_address, message_body)
+    send_email(config, fields.getvalue("reply_to",""), message_body)
 
 
     # Send HTTP response
