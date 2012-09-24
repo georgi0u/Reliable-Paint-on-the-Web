@@ -22,55 +22,64 @@ $(function(){
 
     // Attach placeholder values to forms
     $("input:text, textarea").each(function(){
-        if (!$(this).data('placeholder'))
-            $(this).data('placeholder', $(this).val());
+        $(this).val($(this).data("placeholder"));
     });
 
     // Form Validation
-    $("#contactForm").data("valid", false);
     $("#contactForm .takesInput").data("valid", false);
-
     $("#name_input").bind("blur", function() {
-        if($(this).val() == $(this).data('placeholder') || $(this).val() == '')
-            $(this).addClass("invalid");
-        else {
-            $(this).removeClass("invalid");
-            $(this).data("valid", true);
-        }        
+        validate($(this), true, /.*/);
     });
-
     $("#reply_to_input").bind("blur", function() {
-        $(this).data("valid", false);
-        var email_regex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i
-        var val = $(this).val();
-        if(val == $(this).data('placeholder') || val == '')
-            $(this).addClass("invalid");
-        else if (!email_regex.exec(val))
-            $(this).addClass("invalid");
-        else {
-            alert(val);
-            $(this).removeClass("invalid");
-            $(this).data("valid", true);
-        }
+        var regex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
+        validate($(this), false, regex);
+    });
+    $("#phone_number_input").bind("blur", function() {
+        var regex = /^\(?[0-9]{3}\)?[-. ]?[0-9]{3}[-. ]?[0-9]{4}$/;
+        validate($(this), false, regex);
+    });    
+    $("#message_input").bind("blur", function() {
+        var regex = /.+/;
+        validate($(this), true, regex);
     });
 
-    $("#phone_number_input").bind("blur", function() {
-        $(this).data("valid", false);
-        var email_regex = /^\d{3}$/i xxx start here
-        var val = $(this).val();
-        if(val == $(this).data('placeholder') || val == '')
-            $(this).addClass("invalid");
-        else if (!email_regex.exec(val))
-            $(this).addClass("invalid");
-        else {
-            alert(val);
-            $(this).removeClass("invalid");
-            $(this).data("valid", true);
+    $("#contactForm input.submit").click(function() {
+        
+        var inputs_valid = true;
+        $("#contactForm .takesInput").each(function() {
+            $(this).trigger("blur");
+            inputs_valid &= $(this).data("valid");
+        });
+        if(!inputs_valid) {
+            alert("Please fix the fields outlined in red above");
+            return false;
         }
+
     });
-    
 
 });
+
+function validate(input_element, required, regex) {
+    input_element.data('valid', false);
+    var val = input_element.val().trim();
+    if(!val) return;
+
+    if(val == input_element.data('placeholder') || val == '') {
+        if(required) 
+            input_element.addClass("invalid");
+        else {
+            input_element.data('valid', true);
+            return;
+        }
+    }
+    else if (!regex.exec(val))
+        input_element.addClass("invalid");
+    else {
+        input_element.removeClass("invalid");
+        input_element.data("valid", true);
+        input_element.val(val);
+    }
+}
 
 // Clears forms placeholder text
 function clearForm(event) {

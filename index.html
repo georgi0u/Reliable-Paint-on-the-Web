@@ -102,12 +102,12 @@
         <section id = "webForm">
           <h1>Get In Touch</h1>
           <form action = "cgi-bin/mail.wsgi" method = "post" id = "contactForm">
-            <input class = "takesInput" id = "name_input" name = "name" type = "text" value = "Full Name" border="none"/>
-            <input class = "takesInput" id = "reply_to_input" name = "reply_to" type = "text" value = "Your Email" border="none"/>
-            <input class = "takesInput" id = "phone_number_input" name = "phone_number" type = "text" value = "Your Phone Number" border="none"/>
-            <input class = "takesInput" id = "body_input" name = "body" type = "text" value = "" border = "none"/>
-            <textarea class = "takesInput" id = "message_input" name = "message" type = "textbox">Your Message</textarea>
-            <input class = "submit" type = "submit" value = "Send Us Your Message" border="none">
+            <input class = "takesInput" id = "name_input" name = "name" type = "text" data-placeholder = "Full Name" border="none"/>
+            <input class = "takesInput" id = "reply_to_input" name = "reply_to" type = "text" data-placeholder = "Your Email" border="none"/>
+            <input class = "takesInput" id = "phone_number_input" name = "phone_number" type = "text" data-placeholder = "Your Phone Number" border="none"/>
+            <input id = "body_input" name = "body" type = "text" data-placeholder = "" border = "none"/>
+            <textarea class = "takesInput" id = "message_input" name = "message" type = "textbox" data-placeholder = "Your Message"> Message</textarea>
+            <input class = "submit" type = "submit" data-placeholder = "Send Us Your Message" border="none">
           </form>        
         </section>
         
