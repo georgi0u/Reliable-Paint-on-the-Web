@@ -6,7 +6,7 @@ $(function(){
     });
 
     // Attach an event listener to all input fields to clear the "default" value on click
-    $("input:text, textarea").bind("focus blur", clearForm);
+    $("input:text, textarea").bind("focus blur", massageInput);
 
     // Flip between core values and about us sections
     $("section#coreValuesAndAboutUs > h1.nonActive").live('click',function(event){
@@ -21,9 +21,7 @@ $(function(){
     });
 
     // Attach placeholder values to forms
-    $("input:text, textarea").each(function(){
-        $(this).val($(this).data("placeholder"));
-    });
+    clearForm();
 
     // Form Validation
     $("#contactForm .takesInput").data("valid", false);
@@ -42,22 +40,42 @@ $(function(){
         var regex = /.+/;
         validate($(this), true, regex);
     });
-
     $("#contactForm input.submit").click(function() {
-        
+        if($("body_input").val() != "")
+            return false;        
+
+        if(isPlaceheld($("#reply_to_input")) && isPlaceheld($("#phone_number_input"))) {
+            alert("Please enter either an email address or a phonenumber for us to get back to you by");
+            return false;
+        }
+
         var inputs_valid = true;
+
         $("#contactForm .takesInput").each(function() {
             $(this).trigger("blur");
             inputs_valid &= $(this).data("valid");
         });
+
         if(!inputs_valid) {
             alert("Please fix the fields outlined in red above");
             return false;
-        }
+        }        
 
+        alert("valid");                        
     });
-
 });
+
+function clearForm() {
+    $("input:text, textarea").each(function(){
+        $(this).val($(this).data("placeholder"));
+    });
+}
+
+
+function isPlaceheld(element) {
+    return (element.val() == element.data("placeholder") ||
+            element.val() == "");
+}
 
 function validate(input_element, required, regex) {
     input_element.data('valid', false);
@@ -82,7 +100,7 @@ function validate(input_element, required, regex) {
 }
 
 // Clears forms placeholder text
-function clearForm(event) {
+function massageInput(event) {
     if (event.type == 'focus') {    
         if ($(this).val() == $(this).data('placeholder'))
             $(this).val('');
