@@ -62,7 +62,9 @@ body {background:url("./graphics/egg_shell.png");.sans;}
 h1, h2, h3, h4, h5 {color:@header_red;.serif;}
 
 @header_red: #d10000;
+@footer_green: #012624;
 @max_width:960px;
+
 .shadowed {
     -moz-box-shadow: 0 0 10px #aaa;
     -webkit-box-shadow: 0 0 10px #aaa;
@@ -282,12 +284,12 @@ footer {
         form {
             margin-left:30px;
             margin-right:30px;
+            div {position:relative;}
             label {
-                padding:20px 10px 0 10px;
-                display:block;
+                margin:15px 10px 0 10px;
                 color:#fff;
+                display:inline-block;
             }
-            #body_input {display:none;}
             .takesInput {
                 display:block;
                 padding:10px;
@@ -296,8 +298,15 @@ footer {
                 border:2px #fff solid;
                 width:400px;
                 font-family:tahoma; 
-                &.invalid {border:2px red solid !important;}
+                &.invalid {
+                    border:2px red solid;
+                    color:red !important;
+                    font-style:italic;
+                    letter-spacing:1px;
+                }
             }
+            .placeHolder {color:#999;}
+            #body_input {display:none;}
             textarea {
                 min-height:200px;
                 width:880px !important;
@@ -322,7 +331,6 @@ footer {
                 text-align:center;
                 .serif;
                 em {
-                    @color: #012624;
                     background:url('./graphics/footer_border.png') repeat-x;
                     background-position:left bottom;
                 }
@@ -340,13 +348,13 @@ div#copyrightWrapper {
     position:relative;
     width:@max_width;
     margin:auto;
-    color:#012624;
     aside#copyright {
         padding-top:65px;
         margin:0 auto 0 auto;
         line-height:12pt;
         font-size:8pt;
         text-align:center;
+        color:@footer_green;
     }
 }
 

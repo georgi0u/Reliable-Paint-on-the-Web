@@ -65,15 +65,35 @@ $(function(){
     });
 });
 
+function clearInput(input) {
+    input.val(input.data("placeholder"));
+    input.addClass("placeHolder");
+    input.removeClass("invalid");
+}
 function clearForm() {
     $("input:text, textarea").each(function(){
-        $(this).val($(this).data("placeholder"));
+        clearInput($(this));
     });
+}
+
+// Clears forms placeholder text
+function massageInput(event) {
+    if (event.type == 'focus') {    
+        if (isPlaceheld($(this))) {
+            $(this).val('');
+            $(this).removeClass("placeHolder");
+            $(this).removeClass("invalid");
+        }
+    } 
+    else if ($.trim($(this).val()) == '') {
+        clearInput($(this));
+    }
 }
 
 
 function isPlaceheld(element) {
     return (element.val() == element.data("placeholder") ||
+            element.val() == element.data("error_message") ||
             element.val() == "");
 }
 
@@ -82,16 +102,27 @@ function validate(input_element, required, regex) {
     var val = input_element.val().trim();
     if(!val) return;
 
-    if(val == input_element.data('placeholder') || val == '') {
-        if(required) 
+    if(val == input_element.data('placeholder') || 
+       val == input_element.data('error_message') ||
+       val == '') 
+    {
+        if(required) {
             input_element.addClass("invalid");
+            var error_message = "This field is required.";
+            input_element.data('error_message',error_message);
+            input_element.val(error_message);
+        }
         else {
             input_element.data('valid', true);
             return;
         }
     }
-    else if (!regex.exec(val))
+    else if (!regex.exec(val)) {
+        var error_message = "This field doesn't look right. Is it in the correct format?";
+        input_element.data('error_message',error_message);
+        input_element.val(error_message);
         input_element.addClass("invalid");
+    }
     else {
         input_element.removeClass("invalid");
         input_element.data("valid", true);
@@ -99,16 +130,7 @@ function validate(input_element, required, regex) {
     }
 }
 
-// Clears forms placeholder text
-function massageInput(event) {
-    if (event.type == 'focus') {    
-        if ($(this).val() == $(this).data('placeholder'))
-            $(this).val('');
-    } 
-    else
-        if ($.trim($(this).val()) == '')
-            $(this).val($(this).data('placeholder'));
-}
+
 
 // Email obfuscator script 2.1 by Tim Williams, University of Arizona
 // Random encryption key feature by Andrew Moulden, Site Engineering Ltd
