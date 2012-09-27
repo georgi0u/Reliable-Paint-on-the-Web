@@ -284,14 +284,24 @@ footer {
         form {
             margin-left:30px;
             margin-right:30px;
-            div {position:relative;}
+            .label_wrapper {
+                margin-top:15px;
+            }
+            a {
+                font-size:10pt;
+                color:#ff6b6b;
+            }
             label {
-                margin:15px 10px 0 10px;
+                margin:0 10px 0 10px;
                 color:#fff;
-                display:inline-block;
+            }
+            .error_message {
+                margin-left:10px;
+                color:#fff;//#ff6b6b;
+                font-size:10pt;
             }
             .takesInput {
-                display:block;
+                display:inline;
                 padding:10px;
                 border-radius:5px;
                 margin-top:10px;
@@ -300,9 +310,6 @@ footer {
                 font-family:tahoma; 
                 &.invalid {
                     border:2px red solid;
-                    color:red !important;
-                    font-style:italic;
-                    letter-spacing:1px;
                 }
             }
             .placeHolder {color:#999;}
@@ -316,7 +323,7 @@ footer {
                 padding:10px;
                 border:0;
                 background:#fff;
-                margin-top:10px;
+                margin-top:15px;
                 margin-left:0;
                 &:hover {cursor:pointer;}
             }

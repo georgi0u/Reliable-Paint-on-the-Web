@@ -6,7 +6,7 @@ $(function(){
     });
 
     // Attach an event listener to all input fields to clear the "default" value on click
-    $("input:text, textarea").bind("focus blur", massageInput);
+    $("input:text, textarea").bind("focus blur", inputFocusHandler);
 
     // Flip between core values and about us sections
     $("section#coreValuesAndAboutUs > h1.nonActive").live('click',function(event){
@@ -21,7 +21,9 @@ $(function(){
     });
 
     // Attach placeholder values to forms
-    clearForm();
+    $("input:text, textarea").each(function(){
+        setPlaceHolder($(this));
+    });
 
     // Form Validation
     $("#contactForm .takesInput").data("valid", false);
@@ -33,13 +35,14 @@ $(function(){
         validate($(this), false, regex);
     });
     $("#phone_number_input").bind("blur", function() {
-        var regex = /^\(?[0-9]{3}\)?[-. ]?[0-9]{3}[-. ]?[0-9]{4}$/;
+        var regex = /^(\(?[0-9]{3}\)?[-. ]?[0-9]{3}[-. ]?[0-9]{4})|([A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4})$/;
         validate($(this), false, regex);
     });    
     $("#message_input").bind("blur", function() {
         var regex = /.+/;
         validate($(this), true, regex);
     });
+
     $("#contactForm input.submit").click(function() {
         if($("body_input").val() != "")
             return false;        
@@ -62,39 +65,44 @@ $(function(){
         }        
 
         alert("valid");                        
+        return false;
     });
 });
 
-function clearInput(input) {
-    input.val(input.data("placeholder"));
-    input.addClass("placeHolder");
-    input.removeClass("invalid");
-}
-function clearForm() {
-    $("input:text, textarea").each(function(){
-        clearInput($(this));
-    });
+function isPlaceheld(element) {
+    return (element.val() == element.data("placeholder"));    
 }
 
-// Clears forms placeholder text
-function massageInput(event) {
-    if (event.type == 'focus') {    
-        if (isPlaceheld($(this))) {
-            $(this).val('');
-            $(this).removeClass("placeHolder");
-            $(this).removeClass("invalid");
-        }
+function setPlaceHolder(input_element) {
+    input_element.val(input_element.data("placeholder"));
+    input_element.addClass("placeHolder");
+    input_element.removeClass("invalid");
+}
+
+function clearPlaceHolder(input_element) {
+    input_element.val('');
+    input_element.removeClass("placeHolder");
+}
+
+function inputFocusHandler(event) {
+    if (event.type == 'focus') {
+        if (isPlaceheld($(this)))
+            clearPlaceHolder($(this));
     } 
+
     else if ($.trim($(this).val()) == '') {
-        clearInput($(this));
+        setPlaceHolder($(this));
     }
 }
 
+function setFormatErrorMessage(input_element) {
+    var error_message = $(input_element).next("span").data("format_error");
+    setErrorMessage(input_element, error_message);
+}
 
-function isPlaceheld(element) {
-    return (element.val() == element.data("placeholder") ||
-            element.val() == element.data("error_message") ||
-            element.val() == "");
+function setErrorMessage(input_element, error_message) {
+    var id = input_element.attr("id");
+    input_element.next('span').text(error_message);
 }
 
 function validate(input_element, required, regex) {
@@ -102,31 +110,24 @@ function validate(input_element, required, regex) {
     var val = input_element.val().trim();
     if(!val) return;
 
-    if(val == input_element.data('placeholder') || 
-       val == input_element.data('error_message') ||
-       val == '') 
-    {
-        if(required) {
-            input_element.addClass("invalid");
-            var error_message = "This field is required.";
-            input_element.data('error_message',error_message);
-            input_element.val(error_message);
-        }
-        else {
+    if(val == input_element.data('placeholder') || val == '') {
+        if(!required) {
             input_element.data('valid', true);
-            return;
+            setErrorMessage(input_element,"");
+            return;            
         }
+        input_element.addClass("invalid");
+        setErrorMessage(input_element, "This input is required.");
     }
     else if (!regex.exec(val)) {
-        var error_message = "This field doesn't look right. Is it in the correct format?";
-        input_element.data('error_message',error_message);
-        input_element.val(error_message);
+        setFormatErrorMessage(input_element);
         input_element.addClass("invalid");
     }
     else {
         input_element.removeClass("invalid");
         input_element.data("valid", true);
         input_element.val(val);
+        setErrorMessage(input_element,"");
     }
 }
 
