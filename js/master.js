@@ -8,10 +8,6 @@ $(function(){
     });
 
 
-    // Attach an event listener to all input fields to clear the "default" value on click
-    $("input:text, textarea").bind("focus blur", inputFocusHandler);
-
-
     // Flip between core values and about us sections
     $("section#coreValuesAndAboutUs > h1.nonActive").live('click',function(event){
         to_toggle = $("section#coreValuesAndAboutUs").children();
@@ -25,35 +21,39 @@ $(function(){
     });
 
 
-    // Attach placeholder values to forms
+    // Add appropriote functions to input elements
     $("input:text, textarea").each(function(){
-        setPlaceHolder.call($(this));
+        this.isPlaceheld = isPlaceheld;
+        this.setPlaceHolder = setPlaceHolder;
+        this.clearPlaceHolder = clearPlaceHolder;
+        this.setFormatErrorMessage = setFormatErrorMessage;
+        this.setErrorMessage = setErrorMessage;
+        this.validate = validate;
+        $(this).bind("focus blur", inputFocusHandler);
+
+        this.setPlaceHolder();
     });
 
 
     // Form Validation
     $("#contactForm .takesInput").data("valid", false);
     $("#name_input").bind("blur", function() {
-        validate.call($(this), true, /.*/);
+        this.validate(true, /.*/);
     });
     $("#reply_to_input").bind("blur", function() {
-        var regex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
-        validate.call($(this), false, regex);
+        this.validate(false, /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i);
     });
     $("#phone_number_input").bind("blur", function() {
-        var regex = /^(\(?[0-9]{3}\)?[-. ]?[0-9]{3}[-. ]?[0-9]{4})|([A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4})$/;
-        validate.call($(this), false, regex);
+        this.validate(false, /^(?[0-9]{3}\)?[-. ]?[0-9]{3}[-. ]?[0-9]{4}$/i);
     });    
     $("#message_input").bind("blur", function() {
-        var regex = /.+/;
-        validate.call($(this), true, regex);
+        this.validate(true, /.+/);
     });
-
 
 
     $("#contactForm input.submit").click(function() {
         if($("body_input").val() != "")
-            return false;        
+            return false;
 
         if(isPlaceheld($("#reply_to_input")) && isPlaceheld($("#phone_number_input"))) {
             alert("Please enter either an email address or a phonenumber for us to get back to you by");
@@ -77,8 +77,8 @@ $(function(){
     });
 });
 
-var isPlaceheld = function(element) {
-    return (element.val() == element.data("placeholder"));    
+function isPlaceheld() {
+    return ($(this).val() == $(this).data("placeholder"));
 }
 
 function setPlaceHolder() {
@@ -94,11 +94,11 @@ function clearPlaceHolder() {
 
 function inputFocusHandler(event) {
     if (event.type == 'focus') {
-        if (isPlaceheld($(this)))
-            clearPlaceHolder.call($(this));
+        if (this.isPlaceheld())
+            this.clearPlaceHolder();
     } 
     else if ($.trim($(this).val()) == '') {
-        setPlaceHolder.call($(this));
+        this.setPlaceHolder()
     }
 }
 
@@ -112,7 +112,8 @@ function setErrorMessage(error_message) {
     $(this).next('span').text(error_message);
 }
 
-attach functions to input elements
+
+
 
 function validate(required, regex) {
     $(this).data('valid', false);
