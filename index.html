@@ -1,54 +1,61 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta charset="UTF-8">
+
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/jquery-ui.min.js"></script>
 
     <script src="./js/jquery.smooth-scroll.min.js"></script>
     <script src="./js/jquery.form.js"></script>
     <script src="./js/master.js"></script>
+
     <link rel="stylesheet/less" type="text/css" href="./style.less"/>
     <script src="./js/less.js" type="text/javascript"></script>
-	<title>Reliable Paint</title>
-    
+
     <!--[if lt IE 9]>
         <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]--> 
+    
+	<title>Reliable Paint</title>    
   </head>
 
   <body>
-
     <div id = "topBarWrapper">
       <header id = "topBar">
         <nav>
           <ul id = "navLinks">
-            <li class = "navLink"><a href = "#gallery">Gallery</a>
+            <li class = "navLink"><a href = "#top">Gallery</a>
             <li class = "navLink"><a href = "#coreValuesAndAboutUs">About Us</a>
             <li class = "navLink"><a href = "#ourServices">Our Services</a>
-            <li class = "navLink"><a href = "#contactUs">Contact Us</a>
+            <li class = "navLink"><a id = "contactUsNav" href = "#contactUs">Contact Us</a>
           </ul>
         </nav>
-        <address>
-          <ul id = "contactQuickRef">
-            <li class = "navLink"><h2>(email)</h2><script>document.write(email());</script>
-            <li class = "navLink"><h2>(phone)</h2>516.313.6414
-          </ul>
-        </address>
+
+        <ul id = "contactQuickRef">
+          <li class = "navLink"><h2>email</h2><address><script>document.write(email());</script></address>
+          <li class = "navLink"><h2>phone</h2><address>516.313.6414</address>
+        </ul>
+
       </header>    
     </div>
 
     <header id = "logoHeader">
-      <img id = "logo" src = "./graphics/1.png"/>
+      <img alt = "logo" id = "logo" src = "./graphics/1.png"/>
+      <h2><span>&#8220;</span>A Quality, New York Based, Licensed and Insured Painting and Power-Washing Company<span>&#8221;</span></h2>
     </header>
+
 
     <div id = "mainWrapper">
 
       <section id = "gallery" class = "mainSection">
-        <a href = "#" id = "goLeft"></a>
+        <!-- <a href = "#" id = "goLeft"></a> -->
         <div id = "imageWrapper">
-          <img class = "galleryImage"src = "./images/1.jpg"/>
+          <img alt = "Reliable Paint Gallery Image"
+               class = "galleryImage"
+               src = "./images/1.jpg"/>
         </div>
-        <a href = "#" id = "goRight"></a>
+        <!-- <a href = "#" id = "goRight"></a> -->
       </section>
 
 
@@ -76,30 +83,23 @@
         </section>
 
         <section id = "aboutUs" class = "nonActive">
-          <p class = "indent">Reliable Paint is a Nassau County based contracting company focused on providing elegant and dependable home improvement services. Specifically, we specialize in painting and power-washing both residential homes and commercial properties. We operate in and around the Nassau County area of Long Island, NY and have been doing business long enough - over 25 years - to know how to start a job, do excellent work, and finish on time, all while keeping customers informed and in control of their project's execution.</p>
+          <p class = "indent">Reliable Paint is a licensed and insured, Nassau County based contracting company focused on providing elegant and dependable home improvement services. Specifically, we specialize in painting and power-washing both residential homes and commercial properties. We operate in and around the Nassau County area of Long Island, NY and have been doing business long enough - over 25 years - to know how to start a job, do excellent work, and finish on time, all while keeping customers informed and in control of their project's execution.</p>
           <p class = "indent">We understand that dealing with contractors can be a dreadful thing, and that's a shame, but in a lot of cases the trade has earned its reputation. At Reliable paint, we try to do things a bit differently: our goal is to deliver clean, consistent results that satisfy our customer's expectations in exceptional time, and we work very hard to achieve that goal with every job we undertake. Because of that effort, our business has built an immense amount of lasting relationships with its past customers and has been sustained through the majority of its existence by word of mouth recommendations. Ask around your neighborhood; if you live on Long Island, someone near you has likely had a pleasant experience with Reliable Paint, and we'd like for you to as well.</p>
-          <p id = "signature">Yours Truly,<br/><span style = "font-style:italic;font-weight:bold;">George Georgiou</span><br/>Contractor and President, Reliable Paint</p>
+          <p id = "signature">Yours Truly,<br/><span style = "font-style:italic;font-weight:bold;">George Georgiou</span><br/>Contractor, Foreman, and Principal of Reliable Paint</p>
         </section>
 
       </section>
 
       <section id = "ourServices" class = "mainSection">
-        <ul id = "serviceList">
-          <li>interior painting</li>
-          <li>exterior painting</li>
-          <li>powerwashing</li>
-          <li>staining</li>
-          <li>wallpaper</li>
-          <li>restoration</li>
-        </ul>
-
-
+        <h1>Our Services...</h1>
+        <p>...include <em>Painting</em>, <em>Staining</em>, and <em>Wallpapering</em> of <em>Homes</em>, <em>Decks</em>, and <em>Patios</em>, as well as <em>Commercial Properties</em>; <em>Color Matching</em> and <em>Finish Selection</em>; <em>Preparation</em> including <em>Scraping</em>, <em>Sanding</em>, and <em>Taping</em>; <em>Restoration</em>, such as the <em>Power-Washing</em> of <em>Siding</em>, <em>Brick</em>, <em>Concrete</em>, and <em>Wood</em>; as well as <em>Spackling</em> and <em>Drywall</em> repair.</p>
       </section>
     </div>
 
     <footer>
 
       <section id = "contactUs">
+
         <section id = "webForm">
           <h1>Get In Touch</h1>
           <form action = "cgi-bin/mail.wsgi" method = "post" id = "contactForm">
@@ -146,22 +146,20 @@
 
             <div>
               <label for="message_input">Your Message</label>
-              <textarea class = "takesInput" 
+              <textarea data-valid_value_regex = ".+"
+                        data-placeholder = "What can we do for you?"
+                        class = "takesInput" 
                         id = "message_input"
-                        name = "message" 
-                        type = "textbox"
-                        data-valid_value_regex = ".+"
-                        data-placeholder = "What can we do for you?">
-              </textarea>
+                        name = "message"></textarea>
             </div>
 
-            <input class = "submit" type = "submit" value = "Send Us Your Message" border="none">
+            <input class = "submit" type = "submit" value = "Send Us Your Message">
           </form>        
         </section>
         
         <section id = "altContactInfo">
-          <p>Prefer to send email directly? Write us at <em><script>document.write(email())</script></em></p>
-          <p>Want to speak with someone on the phone? Call us at <em>516.313.6414</em>.</p>
+          <p>Prefer to send email directly? Write us at <em><script>document.write(email())</script></em>,  and we'll get back to you by the next business day or sooner.</p>
+          <p>Want to speak with someone over the phone? Call George &#8212; Principal and Contractor of Reliable Paint &#8212;  directly, any day of the week, 7am to 8pm, at <em>516.313.6414</em>.</p>
         </section>
       </section>
       
@@ -177,3 +175,4 @@
 
   </body>
 </html>
+

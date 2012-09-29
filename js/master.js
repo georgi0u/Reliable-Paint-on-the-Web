@@ -1,12 +1,11 @@
 $(function(){    
-   
-    
-    // Smooth Scroll
-    $('ul#navLinks a').smoothScroll({
-        easing: 'swing',
-        speed: 400
-    });
 
+    // Smooth Scroll 
+    $('ul#navLinks a').smoothScroll();
+    $('#contactUs > a').smoothScroll();
+    $('#contactUsNav').smoothScroll({
+        offset : -1 * ($("#topBar").height() + 3)
+    });
 
     // Flip between core values and about us sections
     $("section#coreValuesAndAboutUs > h1.nonActive").live('click',function(event){

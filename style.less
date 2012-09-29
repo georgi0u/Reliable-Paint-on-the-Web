@@ -58,17 +58,22 @@ input,textarea {
 /* Site Style */
 
 // Setup
-body {background:url("./graphics/egg_shell.png");.sans;}
-h1, h2, h3, h4, h5 {color:@header_red;.serif;}
-
-@header_red: #d10000;
-@footer_green: #012624;
 @max_width:960px;
+@font_red: #d10000;
+@font_green: #012624;
+@background_green:#04756f;
+
+body {background:url("./graphics/egg_shell.png");.sans;}
+h1, h2, h3, h4, h5 {color:@font_red;.serif;}
 
 .shadowed {
     -moz-box-shadow: 0 0 10px #aaa;
     -webkit-box-shadow: 0 0 10px #aaa;
     box-shadow: 0 0 10px #aaa;
+}
+.round {
+    -moz-border-radius: 5px;
+    border-radius: 5px;
 }
 .serif {font-family:Times New Roman;}
 .sans {font-family:tahoma,sans-serif;}
@@ -103,11 +108,13 @@ div#topBarWrapper {
             float:left;
             li {margin-right:20px;}
             li > a {font-weight:bold;}
+
         }
         ul#contactQuickRef {
             float:right;
-            h2 {display:inline;margin-right:8px;}
+            h2 {display:inline;margin-right:8px;color:#aaa;font-size:8pt;.sans;}
             li {margin-left:20px;}
+            address {display:inline;}
         }
     }
 }
@@ -120,6 +127,18 @@ header#logoHeader {
     img#logo {
         width:200px;    
         padding-top:80px;
+    }
+    h2 {
+        position:absolute;
+        bottom:0;
+        line-height:40px;
+        right:0;
+        font-size:19pt;
+        width:540px;
+        .serif;
+        font-style:italic;
+        text-align:center;
+        span{font-size:25pt;}
     }
 }
 
@@ -235,30 +254,30 @@ section#coreValuesAndAboutUs{
 
 // Our Services Main Secion
 section#ourServices {
-    ul#serviceList {
-        display:table;
-        width:100%;
-        li {
-            display:table-cell;
-            text-align:center;
-            height:10px;    
-            color: transparent;
-            font-size:1px;
-            &:nth-child(1) {background-color:red;}
-            &:nth-child(2) {background-color:orange;}
-            &:nth-child(3) {background-color:yellow;}
-            &:nth-child(4) {background-color:green;}
-            &:nth-child(5) {background-color:blue;}
-            &:nth-child(6) {background-color:purple;}
+    padding-top:100px;
+    p {
+        .serif;
+        font-size:18pt;
+        line-height:70px;
+        padding:0 30px 0 30px;
+        em {
+            font-weight:bold;
+            letter-spacing:2px;
+            color:#fff;
+            background:@font_red;
+            border-bottom:2px @font_red solid;
+            padding:8px;
+            .round;
         }
     }
 }
 
 // Footer 
 footer {
+    z-index:3;
     min-height:100%;
     min-width:100%;
-    background-color:#04756f;
+    background-color:@background_green;
     border-top:2px #059992 solid;
     position:relative;
     margin-bottom:-120px;
@@ -277,7 +296,7 @@ footer {
         h1 {
             background:url('./graphics/footer_border.png') repeat-x;
             background-position:left bottom;
-            padding-top:60px;
+            padding-top:30px;
             padding-bottom:5px;
             color:#fff;
         }
@@ -292,13 +311,13 @@ footer {
             }
             .error_message {
                 margin-left:10px;
-                color:#fff;//#ff6b6b;
+                color:#fff;
                 font-size:10pt;
             }
             .takesInput {
                 display:inline;
                 padding:10px;
-                border-radius:5px;
+                .round;
                 margin-top:10px;
                 border:2px #fff solid;
                 width:400px;
@@ -314,7 +333,7 @@ footer {
                 width:880px !important;
             }
             input.submit {
-                border-radius:5px;
+                .round;
                 padding:10px;
                 border:0;
                 background:#fff;
@@ -324,19 +343,24 @@ footer {
             }
         }
         section#altContactInfo {
+            background-color: darken(@background_green, 2%);
             margin-top:100px;
+            padding:20px 30px 20px 30px;
             p {
-                margin:0 30px 0 30px;
+                margin-bottom:30px;
                 font-size:32px;
                 line-height:60px;
                 color:#fff;
-                text-align:center;
                 .serif;
+
                 em {
                     background:url('./graphics/footer_border.png') repeat-x;
                     background-position:left bottom;
+                    font-style:italic;
+                    color: @font_green;
                 }
             }
+            p:last-child {margin-bottom:0;}
         }
     }
 }
@@ -347,6 +371,7 @@ div#copyrightPush {
 }
 
 div#copyrightWrapper {
+    z-index:4;
     position:relative;
     width:@max_width;
     margin:auto;
@@ -356,11 +381,10 @@ div#copyrightWrapper {
         line-height:12pt;
         font-size:8pt;
         text-align:center;
-        color:@footer_green;
+        color:@font_green;
     }
 }
 
 .clear {
     clear:both;
-    display:none;    
 }
