@@ -70,17 +70,18 @@ def format_message(fields):
 <html>
   <head><title>Email</title></head>
   <body>
-    <div style = 'margin:0; padding-top:20px; margin-bottom:20px;'>
-      <ul style = 'list-style:none; margin:0; padding:0;'>
-        <li style = 'display: inline; margin:0; padding:0; padding-right:10px; font-size:12pt;'><h2 style = 'display:inline;'>Name  : </h2><span>{name}</span></li>
-        <li style = 'display: inline; margin:0; padding:0; padding-right:10px; font-size:12pt;'><h2 style = 'display:inline;'>Email : </h2><span>{email}</span></li>
-        <li style = 'display: inline; margin:0; padding:0; padding-right:10px; font-size:12pt;'><h2 style = 'display:inline;'>Phone : </h2><span>{phone_number}</span></li>
-      </ul>
-    </div>
     {note}
-    <h2 style = 'display:inline-block;font-size:12pt;border-bottom:1px #000 solid;'>Message</h2>
-    <div>
+    <h1 style = 'font-size:10pt; text-decoration:underline;'>Message:</h1>
+    <div style = 'font-size:12pt;'>
       {msg_body}
+    </div>
+    <div style = 'margin:0; padding-top:12px; margin-bottom:20px;'>
+      <h1 style = 'font-size:10pt;text-decoration:underline;'>Author's Info:</h1>
+      <ul style = 'list-style:none; margin:0; padding:0;'>
+        <li style = 'margin:0; padding:0; padding-right:10px; font-size:10pt;'><h2 style = 'display:inline; font-size:inherit;'>Name : </h2><span>{name}</span></li>
+        <li style = 'margin:0; padding:0; padding-right:10px; font-size:10pt;'><h2 style = 'display:inline; font-size:inherit;'>Email : </h2><span>{email}</span></li>
+        <li style = 'margin:0; padding:0; padding-right:10px; font-size:10pt;'><h2 style = 'display:inline; font-size:inherit;'>Phone : </h2><span>{phone_number}</span></li>
+      </ul>
     </div>
   </body>
 </html>

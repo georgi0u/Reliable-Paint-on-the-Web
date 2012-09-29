@@ -23,63 +23,44 @@ $(function(){
 
     // Add appropriote functions to input elements
     $("input:text, textarea").each(function(){
-        this.isPlaceheld = isPlaceheld;
-        this.setPlaceHolder = setPlaceHolder;
-        this.clearPlaceHolder = clearPlaceHolder;
-        this.setFormatErrorMessage = setFormatErrorMessage;
-        this.setErrorMessage = setErrorMessage;
         this.validate = validate;
+        this.setPlaceHolder = setPlaceHolder;
         $(this).bind("focus blur", inputFocusHandler);
-
+        $(this).bind("blur", validate);
         this.setPlaceHolder();
     });
 
-
-    // Form Validation
-    $("#contactForm .takesInput").data("valid", false);
-    $("#name_input").bind("blur", function() {
-        this.validate(true, /.*/);
-    });
-    $("#reply_to_input").bind("blur", function() {
-        this.validate(false, /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i);
-    });
-    $("#phone_number_input").bind("blur", function() {
-        this.validate(false, /^(?[0-9]{3}\)?[-. ]?[0-9]{3}[-. ]?[0-9]{4}$/i);
-    });    
-    $("#message_input").bind("blur", function() {
-        this.validate(true, /.+/);
-    });
-
-
-    $("#contactForm input.submit").click(function() {
-        if($("body_input").val() != "")
+    // Validate the form on submit
+    $("#contactForm").submit(function() {
+        // Spam Check
+        if($("#body_input").val() != "")
             return false;
 
-        if(isPlaceheld($("#reply_to_input")) && isPlaceheld($("#phone_number_input"))) {
-            alert("Please enter either an email address or a phonenumber for us to get back to you by");
-            return false;
-        }
+        // Check to see if all the fields are valid
+        var inputs = $(this).find('.takesInput');
 
         var inputs_valid = true;
-
-        $("#contactForm .takesInput").each(function() {
-            $(this).trigger("blur");
+        inputs.each(function() {
+            this.validate();
             inputs_valid &= $(this).data("valid");
         });
 
+        // Error Case
         if(!inputs_valid) {
             alert("Please fix the fields outlined in red above");
             return false;
-        }        
+        }
 
-        alert("valid");                        
+        // Send the Message
+        $(this).ajaxSubmit();
+
+        // Finish Up...
+        inputs.each(setPlaceHolder);
+        alert("Thanks! We'll get back to you by the next business day or sooner!");
         return false;
+
     });
 });
-
-function isPlaceheld() {
-    return ($(this).val() == $(this).data("placeholder"));
-}
 
 function setPlaceHolder() {
     $(this).val($(this).data("placeholder"));
@@ -87,57 +68,49 @@ function setPlaceHolder() {
     $(this).removeClass("invalid");
 }
 
-function clearPlaceHolder() {
-    $(this).val('');
-    $(this).removeClass("placeHolder");
-}
-
 function inputFocusHandler(event) {
     if (event.type == 'focus') {
-        if (this.isPlaceheld())
-            this.clearPlaceHolder();
+        if ($(this).val() == $(this).data("placeholder")) {
+            $(this).val('');
+            $(this).removeClass("placeHolder");            
+        }
     } 
     else if ($.trim($(this).val()) == '') {
         this.setPlaceHolder()
     }
 }
 
-function setFormatErrorMessage() {
-    var error_message = $(this).next("span").data("format_error");
-    setErrorMessage.call($(this),error_message);
-}
+function validate() {
+    var input_element = this;
 
-function setErrorMessage(error_message) {
-    var id = $(this).attr("id");
-    $(this).next('span').text(error_message);
-}
+    var setErrorMessage = function(error_message) {
+        var id = $(this).attr("id");
+        $(input_element).next('span').text(error_message);
+    }
 
+    var setFormatErrorMessage = function() {
+        var error_message = $(input_element).next("span").data("format_error");
+        setErrorMessage.call($(input_element),error_message);
+    }
 
-
-
-function validate(required, regex) {
-    $(this).data('valid', false);
-    var val = $(this).val().trim();
+    var regex = new RegExp($(input_element).data("valid_value_regex"));
+    $(input_element).data('valid', false);
+    var val = $(input_element).val().trim();
     if(!val) return;
 
-    if(val == $(this).data('placeholder') || val == '') {
-        if(!required) {
-            $(this).data('valid', true);
-            setErrorMessage.call($(this),"");
-            return;            
-        }
-        $(this).addClass("invalid");
-        setErrorMessage.call($(this), "This input is required.");
+    if(val == $(input_element).data('placeholder') || val == '') {
+        $(input_element).addClass("invalid");
+        setErrorMessage("This field is required.");
     }
     else if (!regex.exec(val)) {
-        setFormatErrorMessage.call($(this));
-        $(this).addClass("invalid");
+        setFormatErrorMessage();
+        $(input_element).addClass("invalid");
     }
     else {
-        $(this).removeClass("invalid");
-        $(this).data("valid", true);
-        $(this).val(val);
-        setErrorMessage($(this),"");
+        $(input_element).removeClass("invalid");
+        $(input_element).data("valid", true);
+        $(input_element).val(val);
+        setErrorMessage("");
     }
 }
 
