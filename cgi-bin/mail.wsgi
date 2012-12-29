@@ -14,11 +14,11 @@ from email.mime.text import MIMEText
 def send_email(config, reply_to_address, message_body):
 
     # Get Config Values
-    username    = config.get("MAIL_CONFIG", "USERNAME")
-    password    = config.get("MAIL_CONFIG", "PASSWORD")
-    smtp_server = config.get("MAIL_CONFIG", "SMTP_SERVER")
-    to_address  = config.get("MAIL_CONFIG", "TO_ADDRESS")
-    subject     = config.get("MAIL_CONFIG", "SUBJECT")
+    username    = config.get(CONFIG_SECTION, "USERNAME")
+    password    = config.get(CONFIG_SECTION, "PASSWORD")
+    smtp_server = config.get(CONFIG_SECTION, "SMTP_SERVER")
+    to_address  = config.get(CONFIG_SECTION, "TO_ADDRESS")
+    subject     = config.get(CONFIG_SECTION, "SUBJECT")
  
     # Format Message
     email = MIMEText(message_body, 'html')
@@ -133,7 +133,7 @@ def application(environ, start_response):
 
     config = ConfigParser.RawConfigParser()
     dirname = os.path.dirname(__file__)
-    config.read([os.path.join(dirname,'mail.cfg')])
+    config.read([os.path.join(dirname,CONFIG_NAME)])
 
     send_email(config, fields.getvalue("reply_to",""), message_body)
 
